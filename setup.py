@@ -1,7 +1,7 @@
 from setuptools import setup,find_packages
 
 name = "onenonly"
-version = "0.2"
+version = "0.2.1"
 description = "A python library"
 author = "Sahil Rajwar"
 url = "https://github.com/Sahil-Rajwar-2004/One-n-Only"
