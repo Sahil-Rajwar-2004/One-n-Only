@@ -74,6 +74,12 @@ def ceil(number:int|float):
         return int(number)-1
     return int(number)+1
 
+def floor(number:int|float):
+    if number >= 0:
+        return int(number)
+    else:
+        return int(number)-1
+
 def quadraticRoots(coefs:list):
     if len(coefs) != 3:
         raise ValueError("there should be only 3 coeficients!")

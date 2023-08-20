@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 onenonly/__init__.py
@@ -10,9 +11,11 @@ onenonly/LinkedList/__init__.py
 onenonly/List/__init__.py
 onenonly/areas/__init__.py
 onenonly/const/__init__.py
-onenonly/data/__init__.py
+onenonly/data_toolkit/__init__.py
+onenonly/data_toolkit/utils.py
 onenonly/maths/__init__.py
 onenonly/matrix/__init__.py
+onenonly/number/__init__.py
 onenonly/perimeter/__init__.py
 onenonly/queue/__init__.py
 onenonly/search/__init__.py
@@ -20,3 +23,4 @@ onenonly/sort/__init__.py
 onenonly/stack/__init__.py
 onenonly/stats/__init__.py
 onenonly/utils/__init__.py
+onenonly/vector/__init__.py

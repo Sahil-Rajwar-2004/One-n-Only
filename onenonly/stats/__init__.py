@@ -26,6 +26,9 @@ def mode(array:list):
     modes = [num for num, count in counts.items() if count == max_count]
     return modes
 
+def Range(array:list):
+    return maths.maxVal(array)-maths.minVal(array)
+
 def variance(array:list,kind:str="sample"):
     if kind == "sample":
         d = len(array)-1
@@ -37,6 +40,10 @@ def variance(array:list,kind:str="sample"):
 
 def standardDeviation(array:list,kind:str="sample"):
     return maths.sqrt(variance(array,kind))
+
+def quartile(array,percentile):
+    q = maths.floor(len(array)*percentile)
+    return np.sort(array)[q]
 
 def mse(actual:list,predicted:list):
     if len(actual) != len(predicted):

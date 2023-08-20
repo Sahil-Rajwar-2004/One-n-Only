@@ -6,11 +6,12 @@ Modules:
 -------
 `areas`
 `const`
-`data`
+`data_toolkit`
 `LinkedList`
 `List`
 `maths`
 `matrix`
+`number`
 `perimeter`
 `queue`
 `search`
@@ -18,10 +19,9 @@ Modules:
 `stack`
 `stats`
 `utils`
+`vector`
 """
 
-VERSION = "0.1"
+__version__ = "0.2"
 AUTHOR = "Sahil Rajwar"
 HOMEPAGE = "https://github.com/Sahil-Rajwar-2004/One-n-Only"
-
-
