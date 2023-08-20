@@ -22,6 +22,6 @@ Modules:
 `vector`
 """
 
-__version__ = "0.2"
+__version__ = "0.2.1"
 AUTHOR = "Sahil Rajwar"
 HOMEPAGE = "https://github.com/Sahil-Rajwar-2004/One-n-Only"
