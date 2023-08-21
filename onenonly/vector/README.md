@@ -8,12 +8,19 @@ using this module you can work with vector calculations that consist
 5. ***`Vector.cross(self,other)`*** corss product between two vectors
 6. ***`Vector.magnitude(self)`*** find the magnitude of the vector
 7. ***`Vector.projection(self,other)`*** find the projection of the vector a to b vector
-8. ***`Vector.add(self,other)`*** add two vectors or a scalar to vector
-9. ***`Vector.sub(self,other)`*** subtract two vectors or a scalar from vector
-10. ***`Vector.prod(self,scalar=1.0)`*** simple product between scalar and vector
-11. ***`Vector.div(self,scalar=1.0)`*** simple division between scalar
-13. ***`Vector.floor_div(self,scalar=1.0)`*** simple floor division between scalar
-14. ***`Vector.octant(self)`*** find the octanct of the vector
+8. ***`Vector.angle(self,other)`*** find the angle between two vectors
+9. ***`Vector.distance(self,other)`*** find the distance two vectors
+10. ***`Vector.unitVector(self)`*** find the unit vector
+11. ***`Vector.orthogonalTo(self,other)`*** check if two vectors are in perpendicular to each other or not
+12. ***`Vector.parallelTo(self,other)`*** check if two vectors are in parallel to each other or not
+13. ***`Vector.compareWith(self,other)`*** check for the first vector if its greater than other or not
+14. ***`Vector.scalarProjection(self,other)`*** find the scalar projection of the vector a to b vector
+15. ***`Vector.add(self,other)`*** add two vectors or a scalar to vector
+16. ***`Vector.sub(self,other)`*** subtract two vectors or a scalar from vector
+17. ***`Vector.prod(self,scalar=1.0)`*** simple product between scalar and vector
+18. ***`Vector.div(self,scalar=1.0)`*** simple division between scalar
+19. ***`Vector.floor_div(self,scalar=1.0)`*** simple floor division between scalar
+20. ***`Vector.octant(self)`*** find the octanct of the vector
 
 ```python
 from onenonly.vector import Vector
@@ -41,6 +48,26 @@ print(vec1.magnitude()) # 3.74165738
 
 # projection
 print(vec1.projection(vec2)) # <0.36734693 1.46938775 3.30612244>
+print(vec1.scalarProjection(vec2)) # 0.36734693876760555
+
+# angle between two vectors
+print(vec1.angle(vec2)) # 13.612751361088442
+
+# distance between two vectors
+print(vec1.distance(vec2)) # 6.324555337642616
+
+# unit vector
+print(vec1.unitVector()) # <0.26726124191242406 0.5345224838248481 0.8017837257372722>
+print(vec2.unitVector()) # <0.10101525445413423 0.4040610178165369 0.9091372900872081>
+
+# orthogonal vector
+print(vec1.orthogonalTo(vec2)) # False
+
+# parallel vector
+print(vec1.parallelTo(vec2)) # False
+
+# comparing vectors
+print(vec1.compareWith(vec2)) # -1
 
 # power
 print(vec1.pow(2)) # <1 4 9>

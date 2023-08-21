@@ -16,3 +16,16 @@ def binarySearch(array:list,target:int|float):
         elif array[mid] > target:
             end = mid - 1
     return -1
+
+def naiveString(text,pattern):
+    content = len(text)
+    ptn = len(pattern)
+    positions = []
+
+    for x in range(content-ptn+1):
+        y = 0
+        while y < ptn and text[x+y] == pattern[y]:
+            y += 1
+        if y == ptn:
+            positions.append(x)
+    return positions
