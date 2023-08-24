@@ -118,3 +118,20 @@ def expMovingAvg(array:list,alpha:float):
     for i in range(1,len(array)):
         ema.append(round(alpha*array[i]+(1-alpha)*ema[-1],3))
     return ema
+
+def distance(array1:list,array2:list,kind="euclidean"):
+    array1 = np.array(array1)
+    array2 = np.array(array2)
+    if kind == "euclidean":
+        return np.sqrt(np.sum((array1 - array2) ** 2)) 
+    elif kind == "manhattan":
+        return np.sum(np.abs(array1 - array2))
+    else:
+        return "invalid arguments"
+    
+def line_eq(x:list,y:list):
+    x = np.array(x)
+    y = np.array(y)
+    m = ((np.mean(x) * np.mean(y)) - np.mean(x * y)) / ((np.mean(x) ** 2) - np.mean(x ** 2))
+    b = np.mean(y) - m * np.mean(x)
+    return [m,b]
