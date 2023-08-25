@@ -47,14 +47,11 @@ class LogisticRegression:
         samples,features = xtrain.shape
         self.weights = np.zeros(features)
         self.bias = 0
-
         for _ in range(self.iterations):
             lnr_model = np.dot(xtrain,self.weights) + self.bias
             prds = self.sigmoid_fn(lnr_model)
-
             dw = (1/samples) * np.dot(xtrain.T,(prds - ytrain))
             db = (1/samples) * np.sum(prds - ytrain)
-
             self.weights -= self.learning_rate * dw
             self.bias -= self.learning_rate * db
 
@@ -62,7 +59,7 @@ class LogisticRegression:
         lnr_model = np.dot(xtest,self.weights) + self.bias
         prds = self.sigmoid_fn(lnr_model)
         return prds.round()
-    
+
 class KNNClassifier:
     def __init__(self,kernel=3,dist="euclidean"):
         self.kernel = kernel
@@ -86,3 +83,42 @@ class KNNClassifier:
             return np.sum(np.abs(x1 - x2))
         else:
             raise ValueError("Invalid distance metric")
+
+class NaiveBayes:
+    def __init__(self):
+        self.class_probabilities = {}
+        self.word_given_class_probabilities = {}
+        self.vocab = set()
+        self.classes = set()
+
+    def train(self,xtest,ytest):
+        total_documents = len(ytest)
+        for c in set(ytest):
+            self.classes.add(c)
+            self.class_probabilities[c] = ytest.count(c) / total_documents
+        for c in self.classes:
+            self.word_given_class_probabilities[c] = {}
+        for c in self.classes:
+            documents_in_class = [xtest[i] for i in range(len(xtest)) if ytest[i] == c]
+            words_in_class = ' '.join(documents_in_class).split()
+            total_words_in_class = len(words_in_class)
+            for word in words_in_class:
+                if word not in self.vocab:
+                    self.vocab.add(word)
+                    for other_class in self.classes:
+                        self.word_given_class_probabilities[other_class][word] = 0
+                self.word_given_class_probabilities[c][word] = (words_in_class.count(word) + 1) / (total_words_in_class + len(self.vocab))
+
+    def predict(self,xtest):
+        best_class = None
+        best_score = float('-inf')
+        for c in self.classes:
+            score = np.log(self.class_probabilities[c])
+            words = xtest.split()
+            for word in words:
+                if word in self.word_given_class_probabilities[c]:
+                    score += np.log(self.word_given_class_probabilities[c][word])
+            if score > best_score:
+                best_score = score
+                best_class = c
+        return best_class

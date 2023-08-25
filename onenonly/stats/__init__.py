@@ -128,10 +128,20 @@ def distance(array1:list,array2:list,kind="euclidean"):
         return np.sum(np.abs(array1 - array2))
     else:
         return "invalid arguments"
-    
-def line_eq(x:list,y:list):
-    x = np.array(x)
-    y = np.array(y)
-    m = ((np.mean(x) * np.mean(y)) - np.mean(x * y)) / ((np.mean(x) ** 2) - np.mean(x ** 2))
-    b = np.mean(y) - m * np.mean(x)
-    return [m,b]
+
+def gradientDescent(x,y,learning_rate=0.01,epochs=1000):
+    slope = 0
+    intercept = 0
+    for _ in range(epochs):
+        ypred = slope * x + intercept
+        gradient_slope = (-2/len(x)) * np.sum(x * (y - ypred))
+        gradient_intercept = (-2/len(x)) * np.sum(y - ypred)
+        slope -= learning_rate * gradient_slope
+        intercept -= learning_rate * gradient_intercept
+    return slope,intercept
+
+def minmax_scale(data):
+    min_vals = np.min(data, axis=0)
+    max_vals = np.max(data, axis=0)
+    scaled_data = (data - min_vals) / (max_vals - min_vals)
+    return scaled_data

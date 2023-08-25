@@ -15,6 +15,7 @@ onenonly/const/__init__.py
 onenonly/data_toolkit/__init__.py
 onenonly/data_toolkit/utils.py
 onenonly/learn/__init__.py
+onenonly/learn/preprocessing/__init__.py
 onenonly/maths/__init__.py
 onenonly/matrix/__init__.py
 onenonly/number/__init__.py

@@ -1,5 +1,6 @@
 from onenonly import const
 from onenonly import List
+import numpy as np
 
 def isMatrix(matrix:list):
     if not isinstance(matrix,list):
@@ -23,7 +24,7 @@ def toMatrix(array:list,dim:tuple):
             row.append(array[index])
             index += 1
         matrix.append(row)
-    return matrix
+    return np.array(matrix)
 
 def df2matrix(dataframe):
     matrix = []
@@ -33,7 +34,7 @@ def df2matrix(dataframe):
         for column in columns:
             matrix_row.append(row[column])
         matrix.append(matrix_row)
-    return matrix
+    return np.array(matrix)
 
 def reshape(matrix:list,dim:tuple):
     if not isMatrix(matrix):
@@ -52,7 +53,7 @@ def reshape(matrix:list,dim:tuple):
                 newMatrix.append(newRow)
                 newRow = []
                 count = 0
-    return newMatrix
+    return np.array(newMatrix)
     
 def isSquare(matrix:list):
     if not isMatrix(matrix):
@@ -86,15 +87,15 @@ def info(matrix:list):
     
 def zeros(shape:tuple):
     rows,cols = shape
-    return [[0]*cols for _ in range(rows)]
+    return np.array([[0]*cols for _ in range(rows)])
 
 def ones(shape:tuple):
     rows,cols = shape
-    return [[1]*cols for _ in range(rows)]
+    return np.array([[1]*cols for _ in range(rows)])
     
-def dummy(shape:tuple,value:int|float = 0):
+def dummy(shape:tuple,value:int|float = const.nan):
     rows,cols = shape
-    return [[value]*cols for _ in range(rows)]
+    return np.array([[value]*cols for _ in range(rows)])
 
 def add(*matrices:list):
     for matrix in matrices:
@@ -103,13 +104,13 @@ def add(*matrices:list):
     if len(set(len(matrix) for matrix in matrices)) != 1 or len(set(len(row) for matrix in matrices for row in matrix)) != 1:
         raise ValueError("All matrices must have the same dimensions for addition.")
     result = [[sum(matrix[i][j] for matrix in matrices) for j in range(len(matrices[0][i]))] for i in range(len(matrices[0]))]
-    return result
+    return np.array(result)
     
 def scalarAdd(matrix:list,scalar:int|float=0):
     if not isMatrix(matrix):
         raise ValueError("Error: given nested list isn't in the form of matrix")
     result = [[matrix[i][j]+scalar for j in range(len(matrix[i]))] for i in range(len(matrix))]
-    return result
+    return np.array(result)
     
 def sub(*matrices:list):
     for matrix in matrices:
@@ -118,13 +119,13 @@ def sub(*matrices:list):
     if len(set(len(matrix) for matrix in matrices)) != 1 or len(set(len(row) for matrix in matrices for row in matrix)) != 1:
         raise ValueError("All matrices must have the same dimensions for subtraction.")
     result = [[matrices[0][i][j]-sum(matrix[i][j] for matrix in matrices[1:]) for j in range(len(matrices[0][i]))] for i in range(len(matrices[0]))]
-    return result
+    return np.array(result)
 
 def scalarSub(matrix:list,scalar:int|float=0):
     if not isMatrix(matrix):
         raise ValueError("Error: given nested list isn't in the form of matrix")
     result = [[matrix[i][j]-scalar for j in range(len(matrix[i]))] for i in range(len(matrix))]
-    return result
+    return np.array(result)
 
 def product(*matrices:list):
     result = matrices[0]
@@ -143,7 +144,7 @@ def product(*matrices:list):
                     sum += result[i][k] * matrix[k][j]
                 newResult[i][j] = sum
         result = newResult
-    return result
+    return np.array(result)
 
 def scalarProduct(matrix:list,scalar:int|float=1):
     if not isMatrix(matrix):
@@ -155,37 +156,34 @@ def T(matrix:list):
     if not isMatrix(matrix):
         raise ValueError("Error: given nested list isn't in the form of matrix!")
     result = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
-    return result
+    return np.array(result)
     
 def subMatrix(matrix:list,shape:tuple):
     if not isMatrix(matrix):
         raise ValueError("Error: given nested list isn't in the form of matrix")
     row,col = shape
-    return [matrix[i][:col] + matrix[i][col+1:] for i in range(len(matrix)) if i != row]
+    return np.array([matrix[i][:col] + matrix[i][col+1:] for i in range(len(matrix)) if i != row])
     
 def det(matrix:list):
-    if not isMatrix(matrix):
-        raise ValueError("Error: given nested list isn't in the form of matrix")
-    if not isSquare(matrix):
-        raise ValueError("Error: matrix should have same number of rows and cols")
     if len(matrix) == 1:
         return matrix[0][0]
-    if len(matrix) == 2:
+    elif len(matrix) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
-    res = 0
-    for j in range(len(matrix[0])):
-        sign = (-1) ** j
-        minor = subMatrix(matrix,(0,j))
-        res += sign*matrix[0][j]*det(minor)
-    return res
+    else:
+        res = 0
+        for col in range(len(matrix)):
+            submatrix = [row[:col] + row[col + 1:] for row in matrix[1:]]
+            res += matrix[0][col] * det(submatrix) * (-1) ** col
+        return res
 
-def cofactor(matrix:list):
+def cofactor(matrix:list,shape:tuple):
     if not isMatrix(matrix):
         raise ValueError("Error: given nested list isn't in the form of matrix")
     if not isSquare(matrix):
         raise ValueError("Error: matrix should have same number of rows and cols")
-    cofactors = [[(-1) ** (i + j) * det(subMatrix(matrix,(i,j))) for j in range(len(matrix[0]))] for i in range(len(matrix))]
-    return cofactors
+    row,col = shape
+    submatrix = [row[:col] + row[col + 1:] for row in (matrix[:row] + matrix[row + 1:])]
+    return (-1) ** (row + col) * det(submatrix)
 
 def adjoint(matrix:list):
     if not isMatrix(matrix):
@@ -200,12 +198,17 @@ def inv(matrix:list):
         raise ValueError("Error: given nested list isn't in the form of matrix")
     if not isSquare(matrix):
         raise ValueError("Error: matrix should have same number of rows and cols")
-    det = det(matrix)
-    if det == 0:
-        raise ValueError("Error: matrix is not invertible (non-singular)")
-    adj = adjoint(matrix)
-    inv = scalarProduct(adj,1/det)
-    return inv
+    x = det(matrix)
+    if x == 0:
+        return None
+    inverse = []
+    for i in range(len(matrix)):
+        row = []
+        for j in range(len(matrix)):
+            cofact = cofactor(matrix,(i,j))
+            row.append(cofact / x)
+        inverse.append(row)
+    return np.array(inverse)
     
 def traces(matrix:list):
     if not isMatrix(matrix):
@@ -216,7 +219,26 @@ def traces(matrix:list):
     for x in range(len(matrix)):
         trace += matrix[x][x]
     return trace
-    
+
+def identity(row:int):
+    id_matrix = []
+    for x in range(row):
+        new = []
+        for y in range(row):
+            if x == y:
+                new.append(1)
+            else:
+                new.append(0)
+        id_matrix.append(new)
+    return np.array(id_matrix)
+
+def eye(N,M=None,k=0,dtype=float):
+    if M is None:
+        M = N
+    iden = np.zeros((N,M),dtype=dtype)
+    np.fill_diagonal(iden[max(-k, 0):,max(k, 0):],1)
+    return iden
+
 def diagonalSum(matrix:list):
     if not isMatrix(matrix):
         raise ValueError("Error: input should be a matrix")
@@ -233,20 +255,26 @@ def diagonalSum(matrix:list):
 def removeCol(matrix:list,column:int):
     if not isMatrix(matrix):
         raise ValueError("Error: input should be a matrix")
+    if not isinstance(matrix,list):
+        matrix = list(matrix)
     for rows in matrix:
         rows.remove(rows[column])
-    return matrix
+    return np.array(matrix)
     
 def removeRow(matrix:list,row:int):
     if not isMatrix(matrix):
         raise ValueError("Error: input should be a matrix")
+    if not isinstance(matrix,list):
+        matrix = list(matrix)
     matrix.remove(matrix[row])
-    return matrix
+    return np.array(matrix)
     
 def reciprocal(matrix:list):
     if not isMatrix(matrix):
         raise ValueError("Error: input should be a matrix")
+    if not isinstance(matrix,list):
+        matrix = list(matrix)
     for rows in matrix:
         for x in range(len(rows)):
             rows[x] = 1/rows[x]
-    return matrix
+    return np.array(matrix)

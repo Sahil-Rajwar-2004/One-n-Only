@@ -8,7 +8,7 @@ Modules:
 `array`
 `const`
 `data_toolkit`
-`learn`
+`learn` >> `learn.preprocessing`
 `LinkedList`
 `List`
 `maths`
@@ -24,6 +24,6 @@ Modules:
 `vector`
 """
 
-__version__ = "0.3"
+__version__ = "0.3.1"
 AUTHOR = "Sahil Rajwar"
 HOMEPAGE = "https://github.com/Sahil-Rajwar-2004/One-n-Only"
