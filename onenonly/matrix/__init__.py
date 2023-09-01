@@ -80,10 +80,10 @@ def size(matrix:list):
 def info(matrix:list):
     if not isMatrix(matrix):
         raise ValueError("Error: given nested list isn't in the form of matrix")
-    isSquare = False
+    is_square = False
     if isSquare(matrix):
-        isSquare = True
-    return (dim(matrix),shape(matrix),size(matrix),isSquare)
+        is_square = True
+    return (dim(matrix),shape(matrix),size(matrix),is_square)
     
 def zeros(shape:tuple):
     rows,cols = shape
@@ -210,15 +210,15 @@ def inv(matrix:list):
         inverse.append(row)
     return np.array(inverse)
     
-def traces(matrix:list):
+def trace(matrix:list):
     if not isMatrix(matrix):
         raise ValueError("Error: input should be a matrix")
     if not isSquare(matrix):
         raise ValueError("Error: matrix should have same number of rows and cols")
-    trace = 0
+    traces = 0
     for x in range(len(matrix)):
-        trace += matrix[x][x]
-    return trace
+        traces += matrix[x][x]
+    return traces
 
 def identity(row:int):
     id_matrix = []
@@ -236,7 +236,7 @@ def eye(N,M=None,k=0,dtype=float):
     if M is None:
         M = N
     iden = np.zeros((N,M),dtype=dtype)
-    np.fill_diagonal(iden[max(-k, 0):,max(k, 0):],1)
+    np.fill_diagonal(iden[max(-k,0):,max(k,0):],1)
     return iden
 
 def diagonalSum(matrix:list):
