@@ -22,9 +22,6 @@ Calculates the variance of the values in the input array. The kind parameter spe
 ***`standardDeviation(array: list, kind: str="sample")`***  
 Calculates the standard deviation of the values in the input array. The kind parameter specifies whether to use "sample" or "population" standard deviation formula.
 
-***`quartile(array, percentile)`***  
-Calculates the quartile value at the specified percentile for the input array.
-
 ***`mse(actual: list, predicted: list)`***  
 Calculates the Mean Squared Error (MSE) between the actual and predicted values.
 
@@ -59,7 +56,12 @@ Calculates the exponential moving averages of the input array using a specified 
 Calculates the distance between two arrays using either the Euclidean or Manhattan distance.
 
 ***`gradientDescent(x, y, learning_rate=0.01, epochs=1000)`***  
-Performs gradient descent to find the best-fit slope and intercept for a linear regression model.
+Performs gradient descent to find the best-fit slope and intercept for a linear regression model.  
+
+***`quartiles(data)`***  
+Calculates the quartiles of dataset  
+
+***`outlier(data)`***
 
 ### ***Usage***  
 

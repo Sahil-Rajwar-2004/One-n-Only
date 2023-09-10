@@ -11,6 +11,7 @@ onenonly/LinkedList/__init__.py
 onenonly/List/__init__.py
 onenonly/areas/__init__.py
 onenonly/array/__init__.py
+onenonly/binary/__init__.py
 onenonly/const/__init__.py
 onenonly/data_toolkit/__init__.py
 onenonly/data_toolkit/utils.py
@@ -20,6 +21,8 @@ onenonly/maths/__init__.py
 onenonly/matrix/__init__.py
 onenonly/number/__init__.py
 onenonly/perimeter/__init__.py
+onenonly/physics/__init__.py
+onenonly/physics/simulation.py
 onenonly/queue/__init__.py
 onenonly/search/__init__.py
 onenonly/sort/__init__.py

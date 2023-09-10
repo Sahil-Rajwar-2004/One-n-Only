@@ -1,4 +1,5 @@
 import onenonly.maths as maths
+import onenonly.sort as sort
 import numpy as np
 
 def mean(array:list):
@@ -40,10 +41,6 @@ def variance(array:list,kind:str="sample"):
 
 def standardDeviation(array:list,kind:str="sample"):
     return maths.sqrt(variance(array,kind))
-
-def quartile(array,percentile):
-    q = maths.floor(len(array)*percentile)
-    return np.sort(array)[q]
 
 def mse(actual:list,predicted:list):
     if len(actual) != len(predicted):
@@ -140,8 +137,30 @@ def gradientDescent(x,y,learning_rate=0.01,epochs=1000):
         intercept -= learning_rate * gradient_intercept
     return slope,intercept
 
-def minmax_scale(data):
-    min_vals = np.min(data, axis=0)
-    max_vals = np.max(data, axis=0)
+def minmax_scale(data:list):
+    min_vals = np.min(data,axis=0)
+    max_vals = np.max(data,axis=0)
     scaled_data = (data - min_vals) / (max_vals - min_vals)
     return scaled_data
+
+def quartiles(data:list):
+    data = sort.bubbleSort(data)
+    if len(data) % 2 == 0:
+        q1 = median(data[:len(data)//2])
+        q2 = median(data)
+        q3 = median(data[len(data)//2:])
+    else:
+        q1 = median(data[:len(data)//2])
+        q2 = median(data)
+        q3 = median(data[len(data)//2+1:])
+    return q1,q2,q3,q3-q1
+
+def outlier(data:list):
+    outliers = []
+    Q = quartiles(data)
+    lowerBound = Q[0] - 1.5 * Q[3]
+    upperBound = Q[2] + 1.5 * Q[3]
+    for value in data:
+        if not lowerBound <= value <= upperBound:
+            outliers.append(value)
+    return outliers

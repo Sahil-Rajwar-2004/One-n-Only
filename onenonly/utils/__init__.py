@@ -1,7 +1,6 @@
 import os
-import onenonly.const as const
 
-def searchFile(filename:str,initialdir:str=os.getcwd(),caseSensitive:bool=const.no,searchExtension:bool=const.no):
+def searchFile(filename:str,initialdir:str=os.getcwd(),caseSensitive:bool=False,searchExtension:bool=False):
     matchedFiles = []
     for root, _, files in os.walk(initialdir):
         for file in files:

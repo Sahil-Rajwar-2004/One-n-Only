@@ -4,6 +4,9 @@ class Number:
             value = float(value)
         self.value = value
 
+    def __repr__(self):
+        return repr(self.value)
+
     def __add__(self,other):
         return Number(self.value+other.value)
 
@@ -16,8 +19,11 @@ class Number:
     def __truediv__(self,other):
         return Number(self.value/other.value)
 
-    def __floordiv__(self, other):
+    def __floordiv__(self,other):
         return Number(self.value//other.value)
+    
+    def __pow__(self,other):
+        return Number(self.value**other.value)
 
     def __lt__(self,other):
         return self.value<other.value

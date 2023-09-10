@@ -1,6 +1,5 @@
 import onenonly.maths as maths
 import numpy as np
-from matplotlib import pyplot as plt
 
 class Vector:
     def __init__(self,vector):
