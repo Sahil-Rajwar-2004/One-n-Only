@@ -2,6 +2,48 @@ from matplotlib import pyplot as plt
 from scipy.integrate import odeint
 import numpy as np
 
+
+class SinusoidalWave:
+    def __init__(self,amplitude,frequency,duration=2.0,phase=np.pi/4,sampling_rates=1000):
+        self.amplitude = amplitude
+        self.frequency = frequency
+        self.duration = duration
+        self.phase = phase
+        self.sampling_rates = sampling_rates
+
+    def simulate(self):
+        t = np.linspace(0,self.duration,int(self.sampling_rates*self.duration))
+        y = self.amplitude*np.sin(2*np.pi*self.frequency*t + self.phase)
+        plt.figure(figsize=(8,4))
+        plt.plot(t,y)
+        plt.title("sinusoidal wave")
+        plt.xlabel("Time (seconds)")
+        plt.ylabel("Amplitude")
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+
+class SharpTooth:
+    def __init__(self,amplitude,frequency,duration=2.0,sampling_rates=1000):
+        self.amplitude = amplitude
+        self.frequency = frequency
+        self.duration = duration
+        self.sampling_rates = sampling_rates
+    
+    def simulate(self):
+        t = np.linspace(0,self.duration,int(self.sampling_rates*self.duration))
+        y = self.amplitude * (2 * (t*self.frequency - np.floor(0.5 + t*self.frequency)))
+        plt.figure(figsize=(8,4))
+        plt.plot(t,y)
+        plt.title("sawtooth wave")
+        plt.xlabel("Time (seconds)")
+        plt.ylabel("Amplitude")
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+
 class InterferencePattern:
     def __init__(self,wavelength,distance,screen_distance,screen_width):
         self.wavelength = wavelength

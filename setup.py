@@ -1,7 +1,7 @@
 from setuptools import setup,find_packages
 
 name = "onenonly"
-version = "0.4"
+version = "0.4.1"
 description = "A python library"
 author = "Sahil Rajwar"
 url = "https://github.com/Sahil-Rajwar-2004/One-n-Only"
@@ -18,10 +18,9 @@ setup(
     author=author,
     url=url,
     packages=find_packages(),
-    install_requires=["numpy","pandas","scipy"],
+    install_requires=["numpy","pandas","scipy","matplotlib"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",

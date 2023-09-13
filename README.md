@@ -1,4 +1,4 @@
-# One-n-Only  
+# One-n-Only (v-0.4.1)  
 
 A python library that is very helpful to dealing with maths, statistics, matrices and data structures
 
@@ -11,11 +11,12 @@ pip install onenonly
 ### [PyPI](https://pypi.org/project/onenonly/)
 
 
-# Modules
+# Modules  
 
 ***`onenonly.areas`*** Areas of different geometric shapes  
-***`onenonly.const`*** Constants  
 ***`onenonly.array`*** mathematical operation on arrays  
+***`onenonly.binary`*** operations with binary digits and vice a versa  
+***`onenonly.const`*** Constants  
 ***`onenonly.data_toolkit`*** Data Fetching and Data Manipulation  
 ***`onenonly.learn`*** ML support  >> ***`onenonly.learn.preprocessing`*** process the labels  
 ***`onenonly.LinkedList`*** Storing elements and numbers in a dynamic array  
@@ -24,6 +25,7 @@ pip install onenonly
 ***`onenonly.matrix`*** Maths operation for 2d Array  
 ***`onenonly.number`*** Number for storing int and float  
 ***`onenonly.perimeter`*** Perimeter of different geometric shapes  
+***`onenonly.physics`*** Physics >> ***`onenonly.physics.simulation`*** physics simulations  
 ***`onenonly.queue`*** Storing data using data structure called queues  
 ***`onenonly.search`*** Search an element using different searching algorithm  
 ***`onenonly.sort`*** Sort an array in ascending or descending order in an array  

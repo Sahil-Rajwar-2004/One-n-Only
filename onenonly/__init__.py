@@ -6,6 +6,7 @@ Modules:
 -------
 `areas`
 `array`
+`binary`
 `const`
 `data_toolkit`
 `learn` >> `learn.preprocessing`
@@ -15,6 +16,7 @@ Modules:
 `matrix`
 `number`
 `perimeter`
+`physics`
 `queue`
 `search`
 `sort`
@@ -24,6 +26,6 @@ Modules:
 `vector`
 """
 
-__version__ = "0.4"
+__version__ = "0.4.1"
 AUTHOR = "Sahil Rajwar"
 HOMEPAGE = "https://github.com/Sahil-Rajwar-2004/One-n-Only"

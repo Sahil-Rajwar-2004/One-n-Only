@@ -33,3 +33,51 @@ def bin2str(binary_str):
     decimal_values = [int(segment,2) for segment in binary_segments]
     result = "".join([chr(value) for value in decimal_values])
     return result
+
+def bin2oct(binary_str):
+    while len(binary_str) % 3 != 0:
+        binary_str = "0" + binary_str
+    binary_to_octal_dict = {
+        "000": "0",
+        "001": "1",
+        "010": "2",
+        "011": "3",
+        "100": "4",
+        "101": "5",
+        "110": "6",
+        "111": "7"
+    }
+    octal = ""
+    i = 0
+    while i < len(binary_str):
+        octal += binary_to_octal_dict[binary_str[i:i+3]]
+        i += 3
+    return octal
+
+def bin2hex(binary_str):
+    while len(binary_str) % 4 != 0:
+        binary_str = "0" + binary_str
+    binary_to_hex_dict = {
+        "0000": "0",
+        "0001": "1",
+        "0010": "2",
+        "0011": "3",
+        "0100": "4",
+        "0101": "5",
+        "0110": "6",
+        "0111": "7",
+        "1000": "8",
+        "1001": "9",
+        "1010": "A",
+        "1011": "B",
+        "1100": "C",
+        "1101": "D",
+        "1110": "E",
+        "1111": "F"
+    }
+    hexadecimal = ""
+    i = 0
+    while i < len(binary_str):
+        hexadecimal += binary_to_hex_dict[binary_str[i:i+4]]
+        i += 4
+    return hexadecimal
