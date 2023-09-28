@@ -1,31 +1,40 @@
-r"""
+"""
 One-n-Only, a library for Python
 ================================
 
 Modules:
 -------
-`areas`
-`array`
-`binary`
-`const`
-`data_toolkit`
-`learn` >> `learn.preprocessing`
-`LinkedList`
-`List`
-`maths`
-`matrix`
-`number`
-`perimeter`
-`physics`
-`queue`
-`search`
-`sort`
-`stack`
-`stats`
-`utils`
-`vector`
+`areas`\n
+`array`\n
+`binary`\n
+`complex`\n
+`const`\n
+`data_toolkit`\n
+`learn`\n
+`LinkedList`\n
+`List`\n
+`maths`\n
+`matrix`\n
+`number`\n
+`perimeter`\n
+`periodic_table`\n
+`physics`\n
+`queue`\n
+`search`\n
+`sort`\n
+`stack`\n
+`stats`\n
+`units`\n
+`utils`\n
+`vector`\n
 """
 
-__version__ = "0.4.1"
+import webbrowser
+
+VERSION = "0.5.1"
 AUTHOR = "Sahil Rajwar"
 HOMEPAGE = "https://github.com/Sahil-Rajwar-2004/One-n-Only"
+
+getVersion = lambda: VERSION
+author = lambda: AUTHOR
+openHomePage = lambda: webbrowser.open(HOMEPAGE)

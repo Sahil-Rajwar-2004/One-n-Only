@@ -1,4 +1,4 @@
-# One-n-Only (v-0.4.1)  
+# One-n-Only (v-0.5.1)  
 
 A python library that is very helpful to dealing with maths, statistics, matrices and data structures
 

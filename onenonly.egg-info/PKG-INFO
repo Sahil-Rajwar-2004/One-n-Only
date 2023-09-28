@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: onenonly
-Version: 0.4.1
+Version: 0.5.1
 Summary: A python library
 Home-page: https://github.com/Sahil-Rajwar-2004/One-n-Only
 Author: Sahil Rajwar
@@ -17,7 +17,7 @@ Classifier: Programming Language :: Python :: 3.11
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-# One-n-Only (v-0.4.1)  
+# One-n-Only (v-0.5.1)  
 
 A python library that is very helpful to dealing with maths, statistics, matrices and data structures
 

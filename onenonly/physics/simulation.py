@@ -99,7 +99,7 @@ class FreeFall:
         plt.title("Free Fall Simulation")
         plt.show()
 
-        
+
 class GravitationalLensing:
     def __init__(self,M,grid_size=500):
         self.M = M
